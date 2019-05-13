@@ -1,0 +1,33 @@
+server:
+  port: 10010
+spring:
+  application:
+    name: ly-gateway
+eureka:
+  client:
+    service-url:
+      defaultZone: http://127.0.0.1:10086/eureka
+    registry-fetch-interval-seconds: 10
+zuul:
+  prefix: /api
+  routes:
+    item-service: /item/**
+    upload-service:
+      path: /upload/**
+      serviceId: upload-service
+      strip-prefix: false
+#在路径已经被写好下，去除前缀的意思是这里写了，在自己写的路径中就不要写，如item，去除了前缀，自己定义的就不要写；
+#而upload如果也是去除前缀，那自己定义的只能写image了，所以这里使用不去除前缀，相当于前缀复用了
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 5000
+ribbon:
+#m默认ribbon连接时长是1秒
+  ConnectionTimeOut: 1000
+#连接时长
+  ReadTimeOut: 3500
+
