@@ -56,7 +56,10 @@ public enum ExceptionEnum {
   SPECIFICATION_UPDATE_ERROR(500, "规格更新失败"),
 
   //规格删除失败
-  SPECIFICATION_DELETE_ERROR(500, "规格删除失败"),;
+  SPECIFICATION_DELETE_ERROR(500, "规格删除失败"),
+
+  //商品找不到
+  GOODS_NOT_FOUND(404,"商品找不到"),;
 
 
   private Integer code;
