@@ -103,4 +103,11 @@ public class SpecificationController {
     specificationService.deleteSpecParam(cid,paramName,specName);
     return ResponseEntity.status(HttpStatus.OK).build();
   }
+
+  @GetMapping("params")
+  public ResponseEntity<String> queryParamsByCid(@RequestParam("cid")Long cid){
+    return ResponseEntity.ok(specificationService.querySpecificationsByCid(cid));
+  }
+
+
 }

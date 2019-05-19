@@ -67,6 +67,14 @@ public class BrandService {
     return new PageResult<Brand>(info.getTotal(), info.getPages(), info.getList());
   }
 
+  public List<Brand> queryBrandListByCid(Long cid) {
+    List<Brand> list = brandMapper.selectListByCid(cid);
+    if(CollectionUtils.isEmpty(list)){
+      throw new LyException(ExceptionEnum.BRAND_NOT_FOUND);
+    }
+    return list;
+  }
+
 
   @Transactional
   public void saveBrand(Brand brand, List<Long> cids) {
