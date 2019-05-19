@@ -1,10 +1,12 @@
 package com.leyou.item.pojo;
 
 import lombok.Data;
+import tk.mybatis.mapper.annotation.KeySql;
 
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 /**
  * @author tan
@@ -14,7 +16,7 @@ import java.util.Date;
 @Table(name = "tb_spu")
 public class Spu implements Serializable {
   @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  @KeySql(useGeneratedKeys = true)
   private Long id;
   private Long brandId;
   private Long cid1;// 1级类目
@@ -31,4 +33,10 @@ public class Spu implements Serializable {
   private String cname;
   @Transient
   private String bname;
+
+  @Transient
+  private SpuDetail spuDetail;
+
+  @Transient
+  private List<Sku> skus;
 }
