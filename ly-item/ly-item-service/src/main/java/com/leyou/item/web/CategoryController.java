@@ -30,5 +30,10 @@ public class CategoryController {
     List<Category> categories = categoryService.queryCategoriesByBid(bid);
     return ResponseEntity.ok(categories);
   }
+  @GetMapping("list/{ids}")
+  public ResponseEntity<List<Category>> queryCategoryByIds(@RequestParam("ids") List<Long> ids){
+    List<Category> categories = categoryService.queryCategoryByIds(ids);
+    return ResponseEntity.ok(categories);
+  }
 
 }

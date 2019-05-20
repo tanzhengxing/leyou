@@ -14,7 +14,6 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
 import tk.mybatis.mapper.entity.Example;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -50,14 +49,16 @@ public class GoodsService {
     stockMapper.deleteByIdList(skuIds);
   }
 
-  public void judgeGoods(Long spuId,Boolean saleable) {
+
+  public void judgeGoods(Long spuId, Boolean saleable) {
     Spu spu = spuMapper.selectByPrimaryKey(spuId);
     spu.setSaleable(!saleable);
     int count = spuMapper.updateByPrimaryKey(spu);
-    if(count != 1){
+    if (count != 1) {
       throw new LyException(ExceptionEnum.GOODS_NOT_FOUND);
     }
   }
+
 
   public SpuDetail queryDetail(Long spuId) {
     SpuDetail spuDetail = spuDetailMapper.selectByPrimaryKey(spuId);
@@ -110,6 +111,7 @@ public class GoodsService {
     return new PageResult<>(info.getTotal(), info.getPages(), info.getList());
   }
 
+
   private void loadCnameAndBname(List<Spu> spuList) {
     for (Spu spu : spuList) {
       List<String> names = categoryMapper.selectByIds(spu.getCid1().toString() + "," + spu.getCid2().toString() + "," + spu.getCid3().toString()).stream().map(Category::getName).collect(Collectors.toList());
@@ -121,6 +123,7 @@ public class GoodsService {
     }
 
   }
+
 
   @Transactional
   public void saveGoods(Spu spu) {
@@ -153,6 +156,7 @@ public class GoodsService {
     }
   }
 
+
   @Transactional
   public void updateGoods(Spu spu) {
     //修改spu
@@ -177,6 +181,5 @@ public class GoodsService {
     }).collect(Collectors.toList());
     stockMapper.insertList(stocks);
   }
-
 
 }

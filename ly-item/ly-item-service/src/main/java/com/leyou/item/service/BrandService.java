@@ -44,6 +44,10 @@ public class BrandService {
     }
   }
 
+  public Brand queryBrandById(Long id) {
+    return brandMapper.selectByPrimaryKey(id);
+  }
+
 
   public PageResult<Brand> queryBrandByPage(Integer page, Integer rows, Boolean desc, String sortBy, String key) {
     //分页
